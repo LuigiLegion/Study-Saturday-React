@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import StudentList from './StudentList';
 
 class Main extends React.Component {
   constructor() {
     super();
     this.state = {
       students: [],
+      // selectedStudent: {},
     };
     this.getStudents = this.getStudents.bind(this);
   }
@@ -21,24 +23,17 @@ class Main extends React.Component {
     }
   }
   render() {
-    const curStudentsList = this.state.students;
-    const renderedCurStudentsList = curStudentsList.map(curStudent => {
-      return (
-        <tr key={curStudent.id}>
-          <td>{curStudent.firstName + ' ' + curStudent.lastName}</td>
-        </tr>
-      );
-    });
     return (
       <div>
         <h1>Students</h1>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th>Name</th>
+              <th>Tests</th>
             </tr>
-            {renderedCurStudentsList}
-          </tbody>
+          </thead>
+          <StudentList students={this.state.students} />
         </table>
       </div>
     );
